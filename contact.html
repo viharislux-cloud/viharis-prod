@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Viharis - Bien-être et détente</title>
+    <meta name="description" content="Viharis : Bien-être et détente. Découvrez nos massages, méditations et formations pour revitaliser votre corps et votre esprit.">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="acceuil.css">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <a href="#"><img src="images/Vahiris.png" alt="Viharis Logo"></a>
+        </div>
+        <nav class="nav" role="navigation" aria-label="Menu principal">
+ <a href="index.html" class="btn-menu">Accueil</a>
+
+  <a href="contact.html" class="btn-menu">Contact</a>
+        </nav>
+    </header>
+<main role="main">
+    <!-- HERO -->
+    <section class="hero" id="main-content">
+        <div class="hero-image">
+            <img src="images/massage2.webp" alt="Massage relaxant" loading="lazy">
+            <div class="hero-text">
+                <h1>Page Contact</h1>
+                <p>Sous-titre ou texte d’introduction.</p>
+                <a href="#main-content" class="btn">Découvrir</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION INTRODUCTIVE -->
+    <section class="welcome-section">
+        <div class="container">
+            <h2>Bienvenue Sur la page contact</h2>
+            <p>
+                Découvrez notre univers de bien-être et de détente, où chaque moment est conçu pour harmoniser le corps et l’esprit.
+                Laissez-vous guider et profitez d’expériences uniques qui revitalisent votre énergie.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION SPÉCIALE -->
+    <section class="special-section">
+    
+      <div class="contact-wrapper">
+
+        <!-- FORMULAIRE À GAUCHE -->
+       <div class="contact-form">
+  <h2>Envoyez-nous un message</h2>
+  <form id="contact-form">
+      <!-- Champs pour définir l'expéditeur affiché dans Gmail -->
+    <input type="hidden" name="from_name" value="Viharis.lu">
+    <input type="hidden" name="from_email" value="Viharisnoreply@gmail.com">
+    <input type="text" id="nom" name="user_name" placeholder="Votre nom" required>
+    <input type="email" id="email" name="user_email" placeholder="Votre email" required>
+     <!-- Téléphone avec préfixe et drapeau -->
+        <div class="phone-field">
+          <select id="country-code" name="country_code" required>
+          
+            <option value="+352">LU +352</option>
+			<option value="+33">FR +33</option>
+            <option value="+32">BE +32</option>
+    
+          </select>
+
+          <input type="tel" id="telephone" name="user_phone" placeholder="Votre téléphone" required>
+        </div>
+
+    <select id="ContactType" name="contact_type" required>
+      <option value="">Sujet de votre demande</option>
+      <option value="Massage">Massage</option>
+      <option value="Méditation">Méditation</option>
+      <option value="Formation">Formation</option>
+      <option value="Autres">Autres</option>
+    </select>
+
+    <textarea id="message" name="message" rows="6" placeholder="Votre message" required></textarea>
+
+    
+    
+    
+  
+    <label for="captcha">Entrez le code : <strong>1234</strong></label>
+    <input type="text" id="captcha" name="captcha" placeholder="1234" required>
+	<input type="checkbox" id="newsletter" name="newsletter" value="Oui">
+      <p>Je souhaite m’abonner à la newsletter</p>
+    <button type="submit" class="btn">Envoyer</button>
+
+  </form>
+  <p style="font-size: 0.9em; color: #555;">
+Les informations saisies dans ce formulaire (Prénom, Email, Message) sont utilisées uniquement pour répondre à votre demande. 
+Elles sont conservées pendant 24 mois et ne sont pas partagées avec des tiers. 
+Vous pouvez exercer vos droits d'accès, de rectification ou de suppression en écrivant à <a href="mailto:viharislux@gmail.com">viharislux@gmail.com</a>.
+</p>
+
+</div>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+  // Initialise EmailJS avec ton User ID
+  emailjs.init("5GEa8ZEJk5XnQsw3i");
+
+  const form = document.getElementById("contact-form");
+
+  form.addEventListener("submit", function(e) {
+    e.preventDefault(); // Empêche le rechargement de la page
+
+    // Récupère les valeurs du formulaire
+    const userName = form.user_name.value;
+    const userEmail = form.user_email.value;
+
+    // 1️⃣ Envoi principal à toi-même
+    emailjs.sendForm("service_usbdf8s", "template_cjdm6e9", form)
+      .then(() => {
+        console.log("Message envoyé à toi-même !");
+
+        // 2️⃣ Envoi auto-reply à l'utilisateur
+        emailjs.send("service_gcmkzi4", "template_usereply", {
+          user_name: userName,
+          user_email: userEmail
+        })
+        .then(() => {
+          console.log("Auto-reply envoyé à l'utilisateur !");
+          alert("Message envoyé avec succès !");
+          form.reset(); // Réinitialise le formulaire après les deux envois
+        })
+        .catch(err => {
+          console.error("Erreur auto-reply :", err);
+          alert("Message principal envoyé, mais l'auto-reply a échoué.");
+          form.reset();
+        });
+
+      })
+      .catch(err => {
+        console.error("Erreur EmailJS :", err);
+        alert("Une erreur est survenue, veuillez réessayer.");
+      });
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- COORDONNÉES + CARTE À DROITE -->
+        <div class="contact-info">
+          <h2>Nos coordonnées</h2>
+          <p><strong>Adresse :</strong><br>13 Am Sellerlach, 8525 Calmus Saeul, Luxembourg</p>
+          <p><strong>Téléphone :</strong><br><a href="tel:+352123456789" class="link">+352 12 34 56 789</a></p>
+          <p><strong>Email :</strong><br><a href="mailto:info@viharis.lu" class="link">info@viharis.lu</a></p>
+          
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2579.206959226262!2d5.963941776612361!3d49.72573007146292!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47eaad13f2904797%3A0x3b10ee2e0d24f87!2s13%20Am%20Sellerlach%2C%208525%20Calmus%20Saeul%2C%20Luxembourg!5e0!3m2!1sfr!2sbe!4v1761415603164!5m2!1sfr!2sbe" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-wrapper">
+
+        <!-- Colonne Liens utiles -->
+        <div class="footer-col">
+            <h4>Liens utiles</h4>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="apropos.html">À propos</a></li>
+                <li><a href="prestations.html">Offres & Tarif</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+			
+	
+        </div>
+
+        <!-- Colonne À propos -->
+        <div class="footer-col">
+      	<h4>Mentions légales</h4>
+            <ul>
+                <li><a href="rgpd.html">Politique de protection vie privée</a></li>
+                <li><a href="charte.html">Charte des masseurs</a></li>
+				<li><a href="condition.html">Condition générale de vente</a></li>
+                </ul>
+     
+        </div>
+
+        <!-- Colonne Contact -->
+        <div class="footer-col">
+            <h4>Contactez-nous</h4>
+			  <ul>
+			  <li><a href="contact.html">Contact</a></li>
+			  </ul>
+        </div>
+
+    </div>
+
+    <p class="footer-bottom">&copy; 2025 Viharis — Tous droits réservés - V1.1</p>
+</footer>
+<script>
+const header = document.querySelector('.header');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 50) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
+</script>
+</body>
+</html>
