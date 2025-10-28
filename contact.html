@@ -87,11 +87,51 @@
     
     
     
-  
-    <label for="captcha">Entrez le code : <strong>1234</strong></label>
-    <input type="text" id="captcha" name="captcha" placeholder="1234" required>
+  <div class="g-recaptcha" data-sitekey="6LeNIforAAAAAABYQvLr0qre1VwuQM5j7bbwLiQs"></div>
+
 	<input type="checkbox" id="newsletter" name="newsletter" value="Oui">
       <p>Je souhaite m’abonner à la newsletter</p>
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    // Vérifie si le captcha est rempli
+    if (grecaptcha.getResponse() === "") {
+        alert("Veuillez valider le captcha !");
+        return;
+    }
+
+    // Envoi du formulaire EmailJS
+    const userName = form.user_name.value;
+    const userEmail = form.user_email.value;
+
+    emailjs.sendForm("service_usbdf8s", "template_cjdm6e9", form)
+      .then(() => {
+        console.log("Message envoyé à toi-même !");
+        emailjs.send("service_gcmkzi4", "template_usereply", {
+          user_name: userName,
+          user_email: userEmail
+        })
+        .then(() => {
+          console.log("Auto-reply envoyé à l'utilisateur !");
+          alert("Message envoyé avec succès !");
+          form.reset();
+          grecaptcha.reset(); // Réinitialise le captcha
+        })
+        .catch(err => {
+          console.error("Erreur auto-reply :", err);
+          alert("Message principal envoyé, mais l'auto-reply a échoué.");
+          form.reset();
+          grecaptcha.reset();
+        });
+      })
+      .catch(err => {
+        console.error("Erreur EmailJS :", err);
+        alert("Une erreur est survenue, veuillez réessayer.");
+      });
+});
+
+	  
     <button type="submit" class="btn">Envoyer</button>
 
   </form>
@@ -228,6 +268,8 @@ window.addEventListener('scroll', () => {
   }
 });
 </script>
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </body>
 </html>
+
 
